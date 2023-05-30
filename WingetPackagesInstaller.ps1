@@ -74,7 +74,7 @@ function Install-Packages {
     foreach ($package in $Packages) {
         $packageName = $package.Substring($package.IndexOf('.') + 1)
         Write-Host "Installing package: $packageName" -ForegroundColor Yellow
-        #winget install --id $package --silent -l "$installFolder\$packageName"
+        winget install --id $package --silent -l "$installFolder\$packageName"
 
         if ($LASTEXITCODE -eq 0) {
             Write-Host "$package installed successfully." -ForegroundColor Green
