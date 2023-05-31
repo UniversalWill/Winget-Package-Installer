@@ -49,3 +49,6 @@ The script will install the packages using Winget. It will display the progress 
 
 # Summary
 Once the installation is complete, the script will provide a summary of the installed packages and any skipped packages.
+
+# License
+This script is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
