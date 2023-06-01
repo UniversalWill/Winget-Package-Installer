@@ -1,3 +1,5 @@
+# Copyright (c) 2023 Gennadiy Ivashchenko
+
 param (
     [Parameter(Mandatory=$false)]
     [string]$JsonFilePath = ".\packages.json"
