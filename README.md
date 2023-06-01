@@ -35,4 +35,4 @@ Example JSON file:
 
 ## License
 
-This script is licensed under the [MIT License](https://chat.openai.com/c/LICENSE).
+This script is licensed under the [MIT License](LICENSE).
