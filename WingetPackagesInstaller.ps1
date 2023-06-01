@@ -1,3 +1,8 @@
+param (
+    [Parameter(Mandatory=$false)]
+    [string]$JsonFilePath = ".\packages.json"
+)
+
 # Display welcome message
 Write-Host "===============================================" -ForegroundColor Green
 Write-Host "    Welcome to the Winget Package Installer    " -ForegroundColor Green
@@ -5,10 +10,10 @@ Write-Host "===============================================" -ForegroundColor Gr
 Write-Host
 
 Write-Host "This script will install packages based on the"
-Write-Host "package IDs specified in the 'packages.json' file."
-Write-Host
+Write-Host "package IDs specified in the '$JsonFilePath' file."
+Write-Host "On default .\package.json"
 
-Write-Host "Make sure the 'packages.json' file contains an array of package IDs."
+Write-Host "Make sure the '$JsonFilePath' file contains an array of package IDs."
 Write-Host "Example:"
 Write-Host @"
 [
@@ -58,25 +63,23 @@ if (isWingetInstalled) {
     }
 }
 
-$packagesFilePath = ".\packages.json"
-
-# Check if the 'packages.json' file exists
-if (-not (Test-Path $packagesFilePath)) {
-    Write-Host "Could not find 'packages.json' file" -ForegroundColor Red
+# Check if the JSON file exists
+if (-not (Test-Path $JsonFilePath)) {
+    Write-Host "Could not find '$JsonFilePath' file" -ForegroundColor Red
     Exit
 }
 
 try {
-    $packages = Get-Content -Raw -Path $packagesFilePath | ConvertFrom-JSON -ErrorAction Stop
+    $packages = Get-Content -Raw -Path $JsonFilePath | ConvertFrom-JSON -ErrorAction Stop
 }
 catch {
-    Write-Host "An error occurred while reading 'packages.json':" -ForegroundColor Red
+    Write-Host "An error occurred while reading '$JsonFilePath':" -ForegroundColor Red
     Write-Host "$_" -ForegroundColor Red
     Exit
 }
 
 if ($packages -isnot [System.Array]) {
-    Write-Host "Invalid 'packages.json' format. The file should contain an array of package IDs." -ForegroundColor Red
+    Write-Host "Invalid '$JsonFilePath' format. The file should contain an array of package IDs." -ForegroundColor Red
     Exit
 }
 
